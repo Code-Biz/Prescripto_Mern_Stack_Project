@@ -118,4 +118,37 @@ const getAdminAppointments = async (req,res) => {
     
 };
 
-export { loginAdmin, addDoctor, allDoctorsAdminFrontend, getAdminAppointments } 
+//  ********************************************************************
+//             CANCEL AN APPOINTMENT BY ADMIMN
+//  ____________________________________________________________________
+const cancellAppointmentByAdmin = async (req,res) => {
+  try {
+  
+    const { appointmentId} = req.body;
+   
+    const appointmentData = await appointmentModel.findById(appointmentId);
+  
+    await appointmentModel.findByIdAndUpdate(appointmentId, {cancelled:true})
+
+
+    //RELEASING DOCTOR SLOT AFTER CANCELLATION OF APPOINTMENT
+    const {docId, slotDate, slotTime} = appointmentData;
+
+    const doctorData = await doctorModel.findById(docId);
+    let slots_booked  = doctorData.slots_booked;
+    //In the below line we have filtered all those booked hours/slots with the help of variable timeslot except the one that matches the time of the appoinment that is cancelled
+    slots_booked[slotDate] = slots_booked[slotDate].filter(timeslot=>timeslot!=slotTime)
+    
+    //Now replacing the old slots_booked with the new one that do not contained the cancelled appointment slot
+    await doctorModel.findByIdAndUpdate(docId,{slots_booked})
+
+    res.json({ success: true, message: 'Appointment Cancelled' });
+    
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+  
+};   
+
+export { loginAdmin, addDoctor, allDoctorsAdminFrontend, getAdminAppointments, cancellAppointmentByAdmin } 

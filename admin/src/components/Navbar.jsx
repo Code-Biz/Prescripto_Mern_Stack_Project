@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex flex-col items-center sm:flex-row justify-between py-3 sm:px-10 border-b bg-white  ">
+    <div className="flex sm:flex-row flex-col items-center justify-between py-3 sm:px-10 w-full border-b bg-white ">
       <div className="flex items-center gap-2 text-sm">
         <img src={assets.admin_logo} className="w-36 sm:w-40 cursor-pointer" />
         <p className="border rounded-full px-3 py-1px border-gray-500 text-gray-600">

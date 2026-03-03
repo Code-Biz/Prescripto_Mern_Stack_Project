@@ -1,6 +1,6 @@
 import express from "express";
 import upload from "../middlewares/multer.js";
-import { addDoctor, allDoctorsAdminFrontend, getAdminAppointments, loginAdmin } from "../controllers/adminController.js";
+import { addDoctor, allDoctorsAdminFrontend, cancellAppointmentByAdmin, getAdminAppointments, loginAdmin } from "../controllers/adminController.js";
 import authAdmin from "../middlewares/authAdmin.js";
 import { changeAvailability } from "../controllers/doctorController.js";
 
@@ -12,5 +12,6 @@ adminRouter.post('/login', loginAdmin)
 adminRouter.post('/all-doctors', authAdmin, allDoctorsAdminFrontend)
 adminRouter.post('/change-availability', authAdmin, changeAvailability)
 adminRouter.get('/getAdminAppointments', authAdmin, getAdminAppointments)
+adminRouter.post('/cancel-appointment', authAdmin, cancellAppointmentByAdmin)
 
 export default adminRouter
