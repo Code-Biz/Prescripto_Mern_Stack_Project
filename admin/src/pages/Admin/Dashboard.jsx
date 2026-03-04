@@ -1,16 +1,24 @@
 import React, { useContext, useEffect } from "react";
 import { AdminContext } from "../../context/AdminContext";
 import { assets } from "../../assets/assets";
+import { AppContext } from "../../context/AppContext";
 
 const Dashboard = () => {
-  const { aToken, dashData, getDashData, cancelAppointmentAdmin } =
-    useContext(AdminContext);
+  const {
+    aToken,
+    dashData,
+    appointments,
+    getDashData,
+    cancelAppointmentAdmin,
+  } = useContext(AdminContext);
+
+  const { slotDateFormatted } = useContext(AppContext);
 
   useEffect(() => {
     if (aToken) {
       getDashData();
     }
-  }, [aToken]);
+  }, [aToken, appointments]);
   return (
     dashData && (
       <div className="m-5">
@@ -50,33 +58,45 @@ const Dashboard = () => {
           </div>
 
           <div className="pt-4 border border-t-0">
-            {dashData.latest_appointments.map((appointment, index) => (
-              <div
-                key={index}
-                className="flex items-center px-6 py-3 gap-3 hover:bg-gray-100"
-              >
-                <img
-                  src={appointment.docData.image}
-                  className="rounded-full w-10"
-                />
-                <div>
-                  <p className="text-gray-800 font-medium">
-                    {appointment.docData.name}
-                  </p>
-                  <p className="text-gray-600">{appointment.slotDate}</p>
-                </div>
-                {appointment.cancelled ? (
-                  <p className="text-red-400 text-xs font-medium">Cancelled</p>
-                ) : (
-                  <img
-                    onClick={() => cancelAppointmentAdmin(appointment._id)}
-                    src={assets.cancel_icon}
-                    alt=""
-                    className="w-10 cursor-pointer"
-                  />
-                )}{" "}
+            {appointments.length === 0 ? (
+              <div>
+                <p className="text-primary font-light text-4xl m-10 flex justify-center">
+                  No Appointments Till Now!
+                </p>
               </div>
-            ))}
+            ) : (
+              dashData.latest_appointments.map((appointment, index) => (
+                <div
+                  key={index}
+                  className="flex items-center px-6 py-3 gap-3 my-2 hover:bg-gray-100"
+                >
+                  <img
+                    src={appointment.docData.image}
+                    className="rounded-full w-10"
+                  />
+                  <div className="flex-1 text-sm">
+                    <p className="text-gray-800 font-medium">
+                      {appointment.docData.name}
+                    </p>
+                    <p className="text-gray-600">
+                      {slotDateFormatted(appointment.slotDate)}
+                    </p>
+                  </div>
+                  {appointment.cancelled ? (
+                    <p className="text-red-400 text-xs font-medium">
+                      Cancelled
+                    </p>
+                  ) : (
+                    <img
+                      onClick={() => cancelAppointmentAdmin(appointment._id)}
+                      src={assets.cancel_icon}
+                      alt=""
+                      className="w-10 cursor-pointer"
+                    />
+                  )}
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
