@@ -2,12 +2,14 @@ import React, { useContext, useState } from "react";
 import { AdminContext } from "../context/AdminContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { DoctorContext } from "../context/DoctorContext";
 
 const Login = () => {
   const [state, setState] = useState("Admin");
 
   //Using AdminContext we are getting whatever has been provided by its Provider Gloabally. such as the setaToken in this case
   const { setAtoken, backendUrl } = useContext(AdminContext);
+  const { setDToken } = useContext(DoctorContext);
   const [email, setEmail] = useState("admin@prescripto.com");
   const [password, setPassword] = useState("qwerty123");
 
@@ -22,9 +24,22 @@ const Login = () => {
         });
 
         if (data.success) {
-          setAtoken(data.token);
-          localStorage.setItem("aToken", data.token);
+          setAtoken(data.aToken);
+          localStorage.setItem("aToken", data.aToken);
           toast.info("Token Generated ");
+        } else {
+          toast.error(data.message);
+        }
+      } else {
+        const { data } = await axios.post(backendUrl + "/api/doctor/login", {
+          email,
+          password,
+        });
+
+        if (data.success) {
+          setDToken(data.dToken);
+          localStorage.setItem("dToken", data.dToken);
+          toast.success("Token Generated ");
         } else {
           toast.error(data.message);
         }

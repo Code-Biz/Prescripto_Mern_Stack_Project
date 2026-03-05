@@ -1,9 +1,8 @@
 import doctorModel from "../models/doctorModel.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-
-
-
-
+ 
 //  ********************************************************************
 //             API-CONTROLLER FOR -> CHANGING DOCTORS AVAILABILITY
 //  ____________________________________________________________________
@@ -22,7 +21,7 @@ const changeAvailability = async (req, res) => {
         res.json({ success: false, message: error.message })
     }
 };
-
+ 
 
 
 //  ****************************************************************************
@@ -43,4 +42,35 @@ const allDoctorsGeneralFrontend = async (req, res) => {
 };
 
 
-export { changeAvailability, allDoctorsGeneralFrontend }
+//  ********************************************************************
+//             DOCTOR LOGIN API
+//  ____________________________________________________________________
+
+const loginDoctor = async (req,res) => {
+    try {
+
+        const {email, password} = req.body;
+        const doctor =  await doctorModel.findOne({email});
+
+        if(!doctor){
+             res.json({success:false,message:"Doctor Not Found!"}) 
+        }
+
+        const isMatched = await bcrypt.compare(password, doctor.password);
+
+        if(isMatched){
+            const dToken = jwt.sign({id:doctor._id}, process.env.JWT_SECRET);
+             res.json({success:true,dToken}) 
+             console.log(dToken);
+             
+        }
+        else{ res.json({success:false,message:"Invalid Credentials"}) }
+        
+    } catch (error) {
+         console.log(error);
+        res.json({ success: false, message: error.message })
+    }
+    
+};
+
+export { changeAvailability, allDoctorsGeneralFrontend, loginDoctor }
