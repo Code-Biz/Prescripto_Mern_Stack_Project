@@ -34,7 +34,13 @@ const DoctorContextProvider = (props) => {
     }
   };
 
-  const value = { backendUrl, dToken, setDToken, getAppointments };
+  const value = {
+    backendUrl,
+    dToken,
+    setDToken,
+    appointments,
+    getAppointments,
+  };
 
   return (
     <DoctorContext.Provider value={value}>

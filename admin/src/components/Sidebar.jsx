@@ -9,7 +9,7 @@ const Sidebar = () => {
   const { dToken } = useContext(DoctorContext);
 
   return (
-    <div className="min-h-screen min-w-40 md:min-w-auto bg-white border-r">
+    <div className="min-h-screen  md:min-w-72 bg-white border-r">
       {aToken && (
         <ul className="text-[#515151] mt-5">
           <NavLink
@@ -18,7 +18,8 @@ const Sidebar = () => {
               `flex items-center gap-3 py-3 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
             }
           >
-            <img src={assets.home_icon} /> <p>Dashboard</p>
+            <img src={assets.home_icon} />{" "}
+            <p className="hidden md:block">Dashboard</p>
           </NavLink>
           <NavLink
             to="/all-appointments"
@@ -26,7 +27,8 @@ const Sidebar = () => {
               `flex items-center gap-3 py-3 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
             }
           >
-            <img src={assets.appointment_icon} /> <p>All Apointments</p>
+            <img src={assets.appointment_icon} />{" "}
+            <p className="hidden md:block">All Apointments</p>
           </NavLink>
           <NavLink
             to="/add-doctor"
@@ -34,7 +36,8 @@ const Sidebar = () => {
               `flex items-center gap-3 py-3 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
             }
           >
-            <img src={assets.add_icon} /> <p>Add Doctor</p>
+            <img src={assets.add_icon} />{" "}
+            <p className="hidden md:block">Add Doctor</p>
           </NavLink>
           <NavLink
             to="/doctors-list"
@@ -42,7 +45,8 @@ const Sidebar = () => {
               `flex items-center gap-3 py-3 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
             }
           >
-            <img src={assets.people_icon} /> <p>Doctor List </p>
+            <img src={assets.people_icon} />{" "}
+            <p className="hidden md:block">Doctor List </p>
           </NavLink>
         </ul>
       )}
@@ -54,7 +58,8 @@ const Sidebar = () => {
               `flex items-center gap-3 py-3 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
             }
           >
-            <img src={assets.home_icon} /> <p>Dashboard</p>
+            <img src={assets.home_icon} />{" "}
+            <p className="hidden md:block">Dashboard</p>
           </NavLink>
           <NavLink
             to="/doctor-appointments"
@@ -62,7 +67,8 @@ const Sidebar = () => {
               `flex items-center gap-3 py-3 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
             }
           >
-            <img src={assets.appointment_icon} /> <p>All Apointments</p>
+            <img src={assets.appointment_icon} />{" "}
+            <p className="hidden md:block">All Apointments</p>
           </NavLink>
 
           <NavLink
@@ -71,7 +77,8 @@ const Sidebar = () => {
               `flex items-center gap-3 py-3 px-3 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`
             }
           >
-            <img src={assets.people_icon} /> <p>Doctor Profile </p>
+            <img src={assets.people_icon} />{" "}
+            <p className="hidden md:block">Doctor Profile </p>
           </NavLink>
         </ul>
       )}

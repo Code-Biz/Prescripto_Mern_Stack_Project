@@ -65,3 +65,8 @@ import { something } from ...
 
 If we have to use some dynamic variable names (varaibles whovalue can change) in a string then we use template literals for those vaaraibles.
 -> string + dynamic_variable_name = use template literals. i.e hint: if it changes->use backticks
+
+
+APPCONTEXT -> IT CONTAINS CONTEXT THAT CAN BE CALLED INSIDE ANY APGE OR COMPONENT THROUGHTOUT APPCONTEXT
+ADMINCONTEXT -> IT CONTAINS CONTEXT THAT CAN BE CALLED INSIDE ADMIN FRONTEND RELEVANT PAGES BUT ANY OTHER PAGE OR COMPONENT CAN ALSO CALL IT WHEN NEEDED
+DOCTORCONTEXT -> IT CONTAINS CONTEXT THAT CAN BE CALLED INSIDE DOCTOR FRONTEND RELEVANT PAGES BUT ANY OTHER PAGE OR COMPONENT CAN ALSO CALL IT WHEN NEEDED
