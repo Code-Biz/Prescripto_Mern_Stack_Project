@@ -81,9 +81,55 @@ const getDocAppointments = async (req, res) => {
   }
 };
 
+//  ********************************************************************
+//             API TO MARK APPOINTMENT COMPLETED FROM DOCTOR SIDE
+//  ____________________________________________________________________
+
+const appointmentCompleted = async (req, res) => {
+  try {
+    const { docId, appointmentId } = req.body;
+    const appointmentData = await appointmentModel.findById(appointmentId);
+    if (appointmentData && appointmentData.docId === docId) {
+      await appointmentModel.findByIdAndUpdate(appointmentId, {
+        isCompleted: true,
+      });
+      res.json({ success: true, message: "Appointment Completed" });
+    } else {
+      res.json({ success: false, message: "Mark Failed!" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+//  ********************************************************************
+//             API TO MARK APPOINTMENT CANCELLED FROM DOCTOR SIDE
+//  ____________________________________________________________________
+
+const appointmentCancel = async (req, res) => {
+  try {
+    const { docId, appointmentId } = req.body;
+    const appointmentData = await appointmentModel.findById(appointmentId);
+    if (appointmentData && appointmentData.docId === docId) {
+      await appointmentModel.findByIdAndUpdate(appointmentId, {
+        cancelled: true,
+      });
+      res.json({ success: true, message: "Appointment Cancelled" });
+    } else {
+      res.json({ success: false, message: "Mark Failed!" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
 export {
   changeAvailability,
   allDoctorsGeneralFrontend,
   loginDoctor,
   getDocAppointments,
+  appointmentCompleted,
+  appointmentCancel,
 };
