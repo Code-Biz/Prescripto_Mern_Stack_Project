@@ -6,7 +6,8 @@ export const DoctorContext = createContext();
 
 const DoctorContextProvider = (props) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  const doctorEndpoint = backendUrl + "/api/doctor/";
+  const currency = "$ ";
+  const doctorEndpoint = backendUrl + "/api/doctor";
   const [dToken, setDToken] = useState(
     localStorage.getItem("dToken") ? localStorage.getItem("dToken") : "",
   );
@@ -18,7 +19,7 @@ const DoctorContextProvider = (props) => {
   const getAppointments = async () => {
     try {
       const { data } = await axios.get(
-        doctorEndpoint + "appointments",
+        doctorEndpoint + "/appointments",
 
         { headers: { dToken } },
       );
@@ -41,7 +42,7 @@ const DoctorContextProvider = (props) => {
   const completeAppointment = async (appointmentId) => {
     try {
       const { data } = await axios.post(
-        doctorEndpoint + "complete-appointment",
+        doctorEndpoint + "/complete-appointment",
         { appointmentId },
         { headers: { dToken } },
       );
@@ -61,7 +62,7 @@ const DoctorContextProvider = (props) => {
   const cancelAppointment = async (appointmentId) => {
     try {
       const { data } = await axios.post(
-        doctorEndpoint + "cancel-appointment",
+        doctorEndpoint + "/cancel-appointment",
         { appointmentId },
         { headers: { dToken } },
       );
@@ -77,6 +78,52 @@ const DoctorContextProvider = (props) => {
       toast.error(error.message);
     }
   };
+
+  //  ********************************************************************
+  //             GET DOC DASHBOARD DATA FROM BACKEND AND DB
+  //  ____________________________________________________________________
+
+  const [docDashData, setDocDashData] = useState(false);
+
+  const getDocDashData = async () => {
+    try {
+      const { data } = await axios.get(doctorEndpoint + "/docDashboard", {
+        headers: { dToken },
+      });
+
+      if (data.success) {
+        setDocDashData(data.docDashData);
+        console.log(data.docDashData);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  //  ********************************************************************
+  //      FETCH DOC PROFILE DATA FROM DB
+  //  ____________________________________________________________________
+
+  const [profileData, setProfileData] = useState(false);
+  const getProfileData = async () => {
+    try {
+      const { data } = await axios.get(doctorEndpoint + "/docProfile", {
+        headers: { dToken },
+      });
+
+      if (data.success) {
+        setProfileData(data.docProfileData);
+        console.log(data.docProfileData);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
   const value = {
     backendUrl,
     dToken,
@@ -85,6 +132,14 @@ const DoctorContextProvider = (props) => {
     getAppointments,
     completeAppointment,
     cancelAppointment,
+    getDocDashData,
+    docDashData,
+    setDocDashData,
+    currency,
+
+    profileData,
+    setProfileData,
+    getProfileData,
   };
 
   return (

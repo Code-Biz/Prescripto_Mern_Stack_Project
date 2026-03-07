@@ -125,6 +125,77 @@ const appointmentCancel = async (req, res) => {
   }
 };
 
+//  ********************************************************************
+//             API FOR DOCTOR DASHBOARD DATA
+//  ____________________________________________________________________
+const docDashboard = async (req, res) => {
+  try {
+    const { docId } = req.body;
+    const appointmentData = await appointmentModel.find({ docId });
+    let earnings = 0;
+    let patients = [];
+
+    if (appointmentData) {
+      appointmentData.map((appointment) => {
+        if (!patients.includes(appointment.isCompleted)) {
+          patients.push(appointment.userId);
+        }
+
+        if (appointment.isCompleted) {
+          earnings += appointment.amount;
+        }
+      });
+      console.log(appointmentData);
+
+      const docDashData = {
+        earnings,
+        appointments: appointmentData.length,
+        latestAppointments: appointmentData.reverse().slice(0, 5),
+        patients: patients.length,
+      };
+
+      res.json({ success: true, docDashData });
+    } else {
+      res.json({ success: false, message: "Doctor Data Not Found" });
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error(error.message);
+  }
+};
+
+//  ********************************************************************
+//             API TO GET DOCTOR PROFILE DATA
+//  ____________________________________________________________________
+const docProfileData = async (req, res) => {
+  try {
+    const { docId } = req.body;
+    const docProfileData = await doctorModel
+      .findById(docId)
+      .select("-password");
+
+    res.json({ success: true, docProfileData });
+  } catch (error) {
+    console.log(error);
+    toast.error(error.message);
+  }
+};
+
+//  ********************************************************************
+//             API TO UPDATE DOCTOR PROFILE DATA FROM DOC PANEL
+//  ____________________________________________________________________
+const updateProfileData = async (req, res) => {
+  try {
+    const { docId, fees, address, available } = req.body;
+    await doctorModel.findByIdAndUpdate(docId, { fees, address, available });
+
+    res.json({ success: true, message: "Profile Updated" });
+  } catch (error) {
+    console.log(error);
+    toast.error(error.message);
+  }
+};
+
 export {
   changeAvailability,
   allDoctorsGeneralFrontend,
@@ -132,4 +203,7 @@ export {
   getDocAppointments,
   appointmentCompleted,
   appointmentCancel,
+  docDashboard,
+  docProfileData,
+  updateProfileData,
 };

@@ -35,7 +35,7 @@ const DoctorAppointments = () => {
         {appointments.reverse().map((appointment, index) => (
           <div
             key={index}
-            className="flex flex-wrap justify-between max-lg:justify-start max-lg:p-0.5 max-lg:h-[50vh] max-lg:border-none max-lg:gap-0 max-lg:font-light overflow-y-scroll max-sm:text-base sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-5  items-center text-gray-500 px-6 py-3 border-b hover:bg-primary hover:text-white"
+            className="flex flex-wrap justify-between  sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-5  items-center text-gray-500 px-6 py-3 border-b hover:bg-primary hover:text-white"
           >
             <p className="max-sm:hidden">{index + 1}</p>
             <div className="flex items-center justify-start gap-2 ">
@@ -44,7 +44,7 @@ const DoctorAppointments = () => {
                 alt=""
                 className="w-8 rounded-full "
               />
-              <p className="max-lg:text-sm">{appointment.userData.name}</p>
+              <p className="">{appointment.userData.name}</p>
             </div>
             <div>
               <p className=" text-xs inline border border-primary px-2 rounded-full">
@@ -54,10 +54,10 @@ const DoctorAppointments = () => {
             <p className=" max-sm:hidden">
               {calculateAge(appointment.userData.dob)}
             </p>
-            <p className="max-lg:text-[9px]">
+            <p>
               {slotDateFormatted(appointment.slotDate)}, {appointment.slotTime}
             </p>
-            <p className="max-lg:text-[10px]">
+            <p>
               {currency}
               {appointment.amount}
             </p>
@@ -67,14 +67,14 @@ const DoctorAppointments = () => {
             ) : appointment.isCompleted ? (
               <p className="text-green-500 text-xs font-medium">Completed</p>
             ) : (
-              <div className="flex max-lg:ml-10">
+              <div className="flex ">
                 <img
                   onClick={() => {
                     cancelAppointment(appointment._id);
                   }}
                   src={assets.cancel_icon}
                   alt=""
-                  className="max-lg:w-4 w-8 cursor-pointer hover:scale-105 "
+                  className=" w-8 cursor-pointer hover:scale-105 "
                 />
                 <img
                   onClick={() => {
@@ -82,7 +82,7 @@ const DoctorAppointments = () => {
                   }}
                   src={assets.tick_icon}
                   alt=""
-                  className="max-lg:w-4 w-8 cursor-pointer hover:scale-105"
+                  className=" w-8 cursor-pointer hover:scale-105"
                 />
               </div>
             )}

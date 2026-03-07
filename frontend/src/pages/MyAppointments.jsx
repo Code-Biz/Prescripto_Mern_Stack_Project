@@ -75,8 +75,9 @@ const MyAppointments = () => {
   useEffect(() => {
     if (userToken) {
       getUserAppointments();
+      console.log(appointments);
     }
-  }, [userToken, appointments]);
+  }, [userToken]);
 
   return (
     appointments && (
@@ -115,25 +116,27 @@ const MyAppointments = () => {
               {/* THE BELOW DIV IS TO KEEP THE BUTTONS ON LEFT IN SMALL SCREENS  */}
               <div> </div>
               <div className="flex flex-col justify-end gap-2 ">
-                {!item.cancelled && (
-                  <button className="text-stone-500 text-sm border rounded hover:bg-primary hover:text-white py-2 sm:min-w-48 transition-all dura">
-                    Pay Online
+                {item.isCompleted ? (
+                  <button className="sm:min-w-48 py-2 border border-green-500 rounded text-green-500">
+                    Appointment Completed
                   </button>
-                )}
-
-                {!item.cancelled && (
-                  <button
-                    onClick={() => cancellAppointment(item._id)}
-                    className="text-stone-500 text-sm border rounded hover:bg-red-600 hover:text-white py-2 sm:min-w-48 transition-all dura"
-                  >
-                    Cancel Appointment
-                  </button>
-                )}
-
-                {item.cancelled && (
+                ) : item.cancelled ? (
                   <button className="sm:min-w-48 py-2 border border-red-500 rounded text-red-500">
                     Appointment Cancelled
                   </button>
+                ) : (
+                  <>
+                    <button className="text-stone-500 text-sm border rounded hover:bg-primary hover:text-white py-2 sm:min-w-48 transition-all dura">
+                      Pay Online
+                    </button>
+
+                    <button
+                      onClick={() => cancellAppointment(item._id)}
+                      className="text-stone-500 text-sm border rounded hover:bg-red-600 hover:text-white py-2 sm:min-w-48 transition-all dura"
+                    >
+                      Cancel Appointment
+                    </button>
+                  </>
                 )}
               </div>
             </div>
