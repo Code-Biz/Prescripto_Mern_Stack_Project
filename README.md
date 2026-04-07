@@ -79,7 +79,7 @@ https://github.com/user-attachments/assets/bb3deaed-4234-4f3c-b584-48c7a7f0784c
 ### IMAGE 4
 ![Doctor Panel SS4](https://github.com/user-attachments/assets/3bdd1d4f-ddd1-4523-8755-07af5c0567a7)
 
-## 8. Setup & Local Run (Running Process In Detaile)
+## 8. ⚙️ Setup & Local Run (Running Process In Detaile)
 ---
 1. Clone the repository.
 
@@ -107,7 +107,7 @@ npm run dev
 ```
 (If you need to preview built files, run `npm run build` and `npm run preview` in each frontend folder)
 
-## 9. Required environment variables (create `backend/.env`)
+## ⚙️ 9. Required environment variables (create `backend/.env`)
 - MONGODB_URI=your_mongo_connection_string
 - CLOUDINARY_NAME=your_cloudinary_cloud_name
 - CLOUDINARY_API_KEY=your_cloudinary_api_key
