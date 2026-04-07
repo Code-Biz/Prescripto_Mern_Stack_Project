@@ -79,7 +79,7 @@ https://github.com/user-attachments/assets/bb3deaed-4234-4f3c-b584-48c7a7f0784c
 ### IMAGE 4
 ![Doctor Panel SS4](https://github.com/user-attachments/assets/3bdd1d4f-ddd1-4523-8755-07af5c0567a7)
 
-## 8. ⚙️ Setup & Local Run (Running Process In Detaile)
+## 8. ⚙️ Setup & Local Run (Running Process In Detail)
 ---
 1. Clone the repository.
 
