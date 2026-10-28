@@ -30,10 +30,12 @@ const changeAvailability = async (req, res) => {
 const allDoctorsGeneralFrontend = async (req, res) => {
   try {
     const doctors = await doctorModel.find({}).select(["-password", "-email"]);
+    console.log("Hi from allDoctorsGeneralFrontend ");
+    
     res.json({ success: true, doctors });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.json({ success: false, message: error.message+"asdsad" });
   }
 };
 

@@ -18,7 +18,12 @@ const Doctors = () => {
     }
   };
 
-  //The ApplyFilters Function/Effect is executed automatically everytime thers any change in the value of doctors or speciality
+  //The ApplyFilters Function/Effect is executed automatically everytime theres any change in the value of doctors or speciality.
+  // When we move to the link doctors/dermatologist it means that we have provided a parameter i.e dermatologist which will be stored in the specialty variable of use parameter Hook defined above.
+  // Now in that case, when the page will be loaded and the use effect runs, the condition apply filters will proceed toward the if condition in which the set filter docs filters the docu doctors that make the specialty if there is no perimeter provided on Visiting this link then all the doctors will be filtered. 
+  // The same Scenario will run whenever we click upon the provided buttons for filtering the doctors. Because when we will click For example, the general physician button and on click event will trigger. In that event we are using the navigate hook to OPEN a link doctors/General Physician. So in that scenario a general physician parameter is being provided in the link.  
+  // This General physician parameter will be stored into the specialty variable via the use Param hook and as we have performed an event so the use effect hope will trigger that apply filters function will filter the docs doctor's matching the. Parameter
+  
   useEffect(() => {
     applyFilters();
   }, [doctors, speciality]);
@@ -43,7 +48,7 @@ const Doctors = () => {
         >
           <p
             onClick={() =>
-              speciality === "General physician"
+              speciality === "General Physician"
                 ? navigate("/doctors")
                 : navigate("/doctors/General Physician")
             }

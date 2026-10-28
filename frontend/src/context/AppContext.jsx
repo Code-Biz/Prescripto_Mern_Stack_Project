@@ -8,6 +8,8 @@ export const AppContext = createContext();
 const AppContextProvider = (props) => {
   const currencySymbol = "$";
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  console.log(backendUrl);
+  
 
   //  ********************************************************************
   //             FUNCTION FOR GETTING ALL DOCTORS ADDED IN DATABASE
@@ -21,7 +23,8 @@ const AppContextProvider = (props) => {
 
   const getDoctorsData = async () => {
     try {
-      const { data } = await axios.get(backendUrl + "/api/doctor/doctors-list");
+      
+      const { data } = await axios.get(backendUrl+"/api/doctor/doctors-list");
       if (data.success) {
         setDoctors(data.doctors);
       } else {

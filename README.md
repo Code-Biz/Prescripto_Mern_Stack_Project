@@ -88,6 +88,7 @@ https://github.com/user-attachments/assets/bb3deaed-4234-4f3c-b584-48c7a7f0784c
 ```bash
 cd backend
 npm install
+nom install cors
 # create a .env file in backend/ (example below)
 # start server (dev)
 npm run server
@@ -108,11 +109,17 @@ npm run dev
 (If you need to preview built files, run `npm run build` and `npm run preview` in each frontend folder)
 
 ## ⚙️ 9. Required environment variables (create `backend/.env`)
-- MONGODB_URI=your_mongo_connection_string
+- MONGODB_URI=your_mongo_connection_string_in_""
 - CLOUDINARY_NAME=your_cloudinary_cloud_name
 - CLOUDINARY_API_KEY=your_cloudinary_api_key
 - CLOUDINARY_SECRET_KEY=your_cloudinary_secret_key
 - JWT_SECRET=any_strong_secret
 - ADMIN_EMAIL=your_admin_email
 - ADMIN_PASSWORD=your_admin_password
+- POST = optional_optional_post
+
+## ⚙️ 10. Required environment variables (create `frontend/.env`)
+- VITE_BACKEND_URL = your_backend_url e.g "http://localhost:1234"
+ 
+
 Note: The DB connection will use `MONGODB_URI/prescripto` as the database name.
