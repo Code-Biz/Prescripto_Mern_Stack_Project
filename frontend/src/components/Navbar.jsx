@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -13,8 +14,10 @@ const Navbar = () => {
   const logout = ()=>{
     setUserToken(false)
     localStorage.removeItem('userToken')
+    // Whenever a user will log out, he wil....tomatically directed to the home page
+    navigate("/");
+    
   };
-
   return (
     <div className="flex items-center justify-between mb-5 py-4 text-sm border-b border-b-gray-400">
       <img
@@ -42,7 +45,8 @@ const Navbar = () => {
         </NavLink>
       </ul>
       <div className="flex items-center gap-4">
-        {userToken ? (
+        {
+          userToken ? (
           <div
             className="flex items-center gap-2 cursor-pointer group relative"
             onClick={() => setshowProfileDropDown(!showProfileDropDown)}
@@ -87,7 +91,7 @@ const Navbar = () => {
               </div>
             </div>  
           </div>
-        ) : (
+          ) : (
           <button
             onClick={() => {
               navigate("/login");
@@ -96,7 +100,8 @@ const Navbar = () => {
           >
             Create Account
           </button>
-        )}
+          )
+        }
         <img
           onClick={() => setShowMenu(true)}
           src={assets.menu_icon}
