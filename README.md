@@ -88,7 +88,7 @@ https://github.com/user-attachments/assets/bb3deaed-4234-4f3c-b584-48c7a7f0784c
 ```bash
 cd backend
 npm install
-nom install cors
+npm install cors
 # create a .env file in backend/ (example below)
 # start server (dev)
 npm run server
