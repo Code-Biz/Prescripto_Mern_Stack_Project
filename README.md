@@ -116,10 +116,10 @@ npm run dev
 - JWT_SECRET=any_strong_secret
 - ADMIN_EMAIL=your_admin_email
 - ADMIN_PASSWORD=your_admin_password
-- POST = optional_optional_post
+- PORT = optional_port e.g 5000
 
 ## ⚙️ 10. Required environment variables (create `frontend/.env`)
-- VITE_BACKEND_URL = your_backend_url e.g "http://localhost:1234"
+- VITE_BACKEND_URL = your_backend_url starting with http:
  
 
 Note: The DB connection will use `MONGODB_URI/prescripto` as the database name.
