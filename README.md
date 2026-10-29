@@ -119,7 +119,11 @@ npm run dev
 - PORT = optional_port e.g 5000
 
 ## ⚙️ 10. Required environment variables (create `frontend/.env`)
-- VITE_BACKEND_URL = your_backend_url starting with http:
+- VITE_BACKEND_URL = your_backend_url e.g "http://localhost:1234"
+
+## ⚙️ 11. Required environment variables (create `admin/.env`)
+- VITE_BACKEND_URL = your_backend_url e.g "http://localhost:1234"
+ 
  
 
 Note: The DB connection will use `MONGODB_URI/prescripto` as the database name.
