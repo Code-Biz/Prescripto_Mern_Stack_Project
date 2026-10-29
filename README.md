@@ -108,8 +108,8 @@ npm run dev
 ```
 (If you need to preview built files, run `npm run build` and `npm run preview` in each frontend folder)
 
-## ⚙️ 9. Required environment variables (create `backend/.env`)
-- MONGODB_URI=your_mongo_connection_string_in_""
+## ⚙️ 9. Required environment variables (create `backend/.env`) all in double quotes ""
+- MONGODB_URI=your_mongo_connection_string
 - CLOUDINARY_NAME=your_cloudinary_cloud_name
 - CLOUDINARY_API_KEY=your_cloudinary_api_key
 - CLOUDINARY_SECRET_KEY=your_cloudinary_secret_key
