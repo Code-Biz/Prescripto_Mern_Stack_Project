@@ -6,23 +6,26 @@ import { DoctorContext } from "../context/DoctorContext";
 
 const Login = () => {
   const [state, setState] = useState("Admin");
+  const adminEmail = "admin@prescripto.com";
+  const adminPass = "admin123";
 
   //Using AdminContext we are getting whatever has been provided by its Provider Gloabally. such as the setaToken in this case
   const { setAtoken, backendUrl } = useContext(AdminContext);
   const { setDToken } = useContext(DoctorContext);
-  const [email, setEmail] = useState("admin@prescripto.com");
-  const [password, setPassword] = useState("qwerty123");
+  const [email, setEmail] = useState(adminEmail);
+  const [password, setPassword] = useState(adminPass);
 
   const onSubmitHandler = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); 
 
     try {
       if (state === "Admin") {
-        const { data } = await axios.post(backendUrl + "/api/admin/login", {
+        
+        const { data } = await axios.post(backendUrl+"/api/admin/login", {
           email,
           password,
         });
-
+        
         if (data.success) {
           setAtoken(data.aToken);
           localStorage.setItem("aToken", data.aToken);
@@ -31,7 +34,7 @@ const Login = () => {
           toast.error(data.message);
         }
       } else {
-        const { data } = await axios.post(backendUrl + "/api/doctor/login", {
+        const { data } = await axios.post(backendUrl + '/api/doctor/login', {
           email,
           password,
         });

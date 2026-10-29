@@ -11,7 +11,7 @@ import userModel from "../models/userModel.js";
 //  ____________________________________________________________________
 
 const loginAdmin = async (req, res) => {
-  try {
+  try {    
     const { email, password } = req.body;
 
     if (
